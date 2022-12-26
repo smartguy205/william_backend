@@ -1,10 +1,10 @@
 Deploy To Staging Server.
 1. To Deploy Server Application the Staging Server push the latest code to the master branch. After pushing or merging the latest code to the master branch, the latest merged/pushed code will get updated to the server within 5 minutes.
-3. Link to the staging server (https://testing-platform-clientstaging.herokuapp.com/) 
+3. Link to the staging server (https://testing-platform-serverstaging.herokuapp.com/) 
 
 Deploy To Production Server.
 1. To Deploy Server Application the Production Server push the latest code to the main branch. After pushing or merging the latest code to the main branch, the latest merged/pushed code will get updated to the latest server within 5 minutes.
-3. Link to the Production server (https://client.marketingmgmt.net/)
+3. Link to the Production server (https://test.marketingmgmt.net/)
 
 How to change environment variable for Server app.
 1. Log into teams heroku account or with account which have admin access to marketing-management teams.
