@@ -1,0 +1,32 @@
+.correct{
+    font-weight: bold;
+    color: green;
+}
+
+.incorrect{
+    font-weight: bold;
+    color: red;
+}
+
+.active{
+    margin: 5px;
+    font-weight: bold;
+    background-color: lightgrey;
+}
+
+.para{
+    padding: 15px;
+    font-size: 2.2em;
+    line-height: 1.6em;
+    border: 1px solid lightgrey;
+    background-color: white;
+    font-family: 'Times New Roman',Times,serif;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2em;
+    font-family: 'Times New Roman',Times,serif;
+}

@@ -1,0 +1,12 @@
+.inputGroup .MuiButtonBase-root{
+opacity: 0;
+}
+.inputGroup span{
+    color: #444;
+    font-weight: 900;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+.inputGroup span:hover{
+    color: #999;
+}

@@ -1,0 +1,33 @@
+
+  .timer-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .timer {
+    font-family: "Montserrat";
+    display: inline;
+  }
+  
+  .text {
+    color: #aaa;
+  }
+  
+  .value {
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+    color: #444;
+  }
+
+  .timer_stack div svg{
+    display: none;
+  }
+
+  .timer_stack div div{
+    position: none !important;
+    top: none !important;
+    left: none !important;
+    width: auto !important;
+    height: auto !important;
+  }
+  

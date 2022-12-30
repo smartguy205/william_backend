@@ -1,0 +1,21 @@
+.userTable {
+  max-width: 1400px;
+  margin: auto;
+  font-family: "Roboto", "sans-serif";
+}
+
+table {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid lightsteelblue;
+}
+
+th {
+  cursor: pointer;
+  border-bottom: 1px solid black;
+  
+}
+
+td {
+  text-align: center;
+}

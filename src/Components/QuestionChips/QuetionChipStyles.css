@@ -1,0 +1,38 @@
+.Que-table {
+padding: 20px;
+height: 100%;
+/* max-width: 24rem; */
+}
+
+.Que-table::-webkit-scrollbar{
+    width: 5px;
+}
+.Que-table::-webkit-scrollbar-track{
+    width: 5px;
+    background-color: #999999d2;
+}
+.Que-table::-webkit-scrollbar-thumb{
+    border-radius: 30px;
+    background-color: #666;
+}
+
+.Que-table .MuiCardContent-root {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: start;
+width: 100%;
+padding: 0;
+}
+
+.MuiCardHeader-root {
+padding: 0;
+} 
+
+.chip{
+/* padding: 100px;     */
+min-width: 34px;
+width: 36px;
+border-radius: 3rem;
+margin: 0.3rem !important;
+}
