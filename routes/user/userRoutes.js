@@ -158,7 +158,13 @@ userRouter.route("/getposition").post(async (req, res) => {
     let positionOtherCountries = ['Virtual Assistant', 'Senior Virtual Assistant']
 
     try {
-        const ip = req.ip
+        var ip = req.headers["x-forwarded-for"];
+        if (ip) {
+            var list = ip.split(",");
+            ip = list[list.length - 1];
+        } else {
+            ip = req.ip;
+        }
         country = await getCountry(ip);
 
         if (country.toLowerCase() === 'india') {
