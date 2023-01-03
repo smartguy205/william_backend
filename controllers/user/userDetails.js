@@ -13,6 +13,9 @@ export const getCountry = (ip) => {
             const buffer = fs.readFileSync(`${process.cwd()}/public/GeoLite2-Country.mmdb`);
             const lookup = new Reader(buffer);
             const city = lookup.get(ip);
+            if(!city){
+                resolve("usa");
+            }
             if (city.country.names.en) resolve(city.country.names.en);
             else reject("");
         }
