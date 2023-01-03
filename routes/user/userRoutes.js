@@ -164,7 +164,7 @@ userRouter.route("/getposition").post(async (req, res) => {
           var list = ip.split(",");
           ip = list[list.length-1];
         } else {
-          ip = req.connection.remoteAddress;
+          ip = req.ip;
         }
         country = await getCountry(ip);
 
