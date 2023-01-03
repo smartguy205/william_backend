@@ -154,7 +154,7 @@ userRouter.post('/url', (req, res) => {
 
 userRouter.route("/getposition").post(async (req, res) => {
     let country;
-    let positionIndia = ['Company Secretary', 'Chartered Accountant'];
+    let positionIndia = ['Company Secretary', 'Chartered Accountant', 'Administrative Assistant', 'Lawyer', 'HR Manager', 'Full Stack Developer', 'Head of Security'];
     let positionOtherCountries = ['Virtual Assistant', 'Senior Virtual Assistant']
 
     try {
@@ -168,7 +168,7 @@ userRouter.route("/getposition").post(async (req, res) => {
         }
     }
     catch (error) {
-        return res.status(400).json({ data: positionOtherCountries, success: false, msg: 'Failed to find your country' })
+        return res.status(400).json({ data: positionOtherCountries, success: false, msg: 'Failed to find your country', ip: req.ip })
     }
 });
 

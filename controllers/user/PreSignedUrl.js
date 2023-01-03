@@ -29,14 +29,15 @@ export const createS3PreSignedUrl = {
             const params = {
                 Bucket: bucket,
                 Key: s3key,
-                ContentType: 'application/pdf',
+                ContentType: 'multipart/form-data',
                 Expires: 300,
                 ACL: 'public-read',
             }
             const URL = await s3.getSignedUrl(type, params);
-            let link = `https://s3.console.aws.amazon.com/s3/object/${bucket}?region=us-east-1&prefix=${s3key}`;
+            // let link = `https://s3.console.aws.amazon.com/s3/object/${bucket}?region=us-east-1&prefix=${s3key}`;
+            let link = `https://${bucket}.s3.amazonaws.com/${s3key}`
 
-            return res.json({ success: true, msg: "Url generated", url: URL, file:link })
+            return res.json({ success: true, msg: "Url generated", url: URL, file: link })
         }
         catch (error) {
             return res.json({ success: false, error: "No Url generated", error })
