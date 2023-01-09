@@ -118,12 +118,12 @@ adminRouter.post("/getTestDetails", async (req, res) => {
 // get full detials about user on name click
 adminRouter.post("/getUserPaper", async (req, res) => {
     try {
-        const { id, name } = req.body;
+        const { id } = req.body;
 
         const test = await testModel.findOne({ userID: id }, { _id: 0, userID: 0, __v: 0, Questions: 0, email: 0, retest: 0, isTestCompleted: 0, isTestStarted: 0, createdAt: 0 });
         const user = await userModal.findOne({ _id: id }, { _id: 0, __v: 0, });
         const userFeedback = await feedbackModal.findOne({ userID: id }, { text: 1 });
-        const typingTest1 = await typingTest.findOne({ userId: id });
+        const typingTest1 = await typingTest.findOne({ userID: id });
         if (!test || !user) return res.status(404).json({ success: false, msg: "Failed to find the user or his test" });
 
         const { fullName, email, phone, country, language, position, experience, file, ip } = user;
