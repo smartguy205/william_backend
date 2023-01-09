@@ -128,7 +128,7 @@ adminRouter.post("/getUserPaper", async (req, res) => {
 
         const { fullName, email, phone, country, language, position, experience, file, ip } = user;
         const { score, testType, questionsAttempted, correctAnswers, averageTime, accuracy, updatedAt: date } = test;
-        const { wpm } = typingTest1;
+
         let feedback = "";
         if (userFeedback?.text) {
             feedback = userFeedback.text;
@@ -136,7 +136,7 @@ adminRouter.post("/getUserPaper", async (req, res) => {
 
         const User = {
             fullName, email, phone, country, language, position, experience, file,
-            score, testType, wpm, taccuracy: typingTest1.accuracy, questionsAttempted, correctAnswers, averageTime, accuracy, date,
+            score, testType, wpm: typingTest1?.wpm, taccuracy: typingTest1?.accuracy, questionsAttempted, correctAnswers, averageTime, accuracy, date,
             feedback, ip
         };
 
