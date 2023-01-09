@@ -14,15 +14,16 @@ export const userCV = async (data, req, res) => {
         country = "";
     }
 
+
     userDetailsFormSchema.validate(data)
         .then(async (response) => {
             try {
                 let filename = `${Date.now()}_${response.file.name}`;
                 filename = filename.replace(/\s/g, "_");
 
-                // checking if user already submitted the CV
-                const { email } = response;
-                const user = await userModal.findOne({ email });
+                // checking if user already submitted the CV 
+                const { email, phone } = response;
+                const user = await userModal.findOne({ $or: [{ email: email }, { phone: phone }] });
                 const test = await testModel.findOne({ email: email })
 
                 if (test?.isTestCompleted === true) {

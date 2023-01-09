@@ -37,7 +37,7 @@ export const test1 = [
     "type": 1
   },
   {
-    "Question": "Statement 1: Lewis is the father of Sebastian. Statement 2: Rebecca is a twin with Sebastian.Conclusion: Lewis is the father of Rebecca.",
+    "Question": "Statement 1: Lewis is the father of Sebastian.Statement 2: Rebecca is a twin with Sebastian.Conclusion: Lewis is the father of Rebecca.",
     "Options": ['True', 'False', 'Cannot Say'],
     "Images": [],
     "Solution": "Explanation: The first statement says the Lewis is the father of Sebastian and the second statement that Rebecca is a twin with Sebastian, therefore she is his sister. Therefore it must be the case that Rebecca is the daughter of Lewis. Or in other words, that he is her father.",
@@ -117,7 +117,7 @@ export const test1 = [
     "type": 1
   },
   {
-    "Question": "Fill in the missing words: Forming a lasting impression at a job interview is _____. It is worth remembering also that it is not only about what you can _____ the employer but what they can give back to you.",
+    "Question": "Fill in the missing words: Forming a lasting impression at a job interview is _____. It is worth remembering also that it is not only about what you can_____ the employer but what they can give back to you.",
     "Options": ['important, offer', 'demonstrable, drastic', 'required, extort', 'ideal, store', 'measured, give'],
     "Images": [],
     "Solution": "Explanation: For our first missing word we have: important, demonstrable, required, ideal and measured. Measured doesn't quite work. Demonstrable is possible but is awkward. Important, required and ideal all work in context. It is hard to determine which is best so far. For our second missing word we have: offer, drastic, extort, store and give. Store, drastic and extort do not make sense. Offer and give make sense in context. However, the paired word with 'give' is 'measured' which does not work. Therefore, the only pair that works is 'important, offer'.",
@@ -149,7 +149,7 @@ export const test1 = [
     "type": 1
   },
   {
-    "Question": "Fill in the missing words: Walking across a frozen lake is not a good idea. The ice might be thinner than expected and one can fall ______ the ice into the cold water below. Once submerged, climbing out can be ______ difficult as the ice continues to break under your weight.",
+    "Question": "Fill in the missing words: Walking across a frozen lake is not a good idea. The ice might be thinner than expected and one can fall ______ the ice into the cold water below. Once submerged, climbing out can be______ difficult as the ice continues to break under your weight.",
     "Options": ['beneath, increasingly', 'mark, action', 'thick, quite', 'under, review', 'below, applicably'],
     "Images": [],
     "Solution": "Explanation: The sentence requires a word to describe going under the ice. We have first options for the first word: beneath, mark, thick, under, below. Mark and thick do not work here so they can be disregarded. The other three words all work so they are all possible answers for now. The second word is an adverb and combined with 'difficult'. From our three options, we have: increasingly, review and applicably. Review does not work at all. Applicably works but makes little sense. Increasingly makes sense and works in this situation. Therefore, the correct answer is: beneath, increasingly.",
@@ -197,7 +197,7 @@ export const test1 = [
     "type": 1
   },
   {
-    "Question": "A storage silo is 20ft high with a diameter of 10ft. The silo is being filled up with ground corn and will take 10 minutes to fill to capacity. How many minutes will it take to fill up the silo to 90% capacity?",
+    "Question": "A storage silo is 20ft high with a diameter of 10ft. The silo is being filled up with ground corn and will take 10 minutes to fill to capacity. How many minutes will it take to fill up the silo to 90%capacity?",
     "Options": ['6 minutes', '7 minutes', '8 minutes', '9 minutes', '10 minutes'],
     "Images": [],
     "Solution": "Explanation: 10 / 10 * 9 = 9",
@@ -253,7 +253,7 @@ export const test1 = [
     "type": 1
   },
   {
-    "Question": "If the Water use in England & Wales in 2002 totalled to 38 ('000 megalitres per day), how many were used by 'Fish Farming'? ",
+    "Question": "If the Water use in England & Wales in 2002 totalled to 38 ('000 megalitres per day), how many were used by 'Fish Farming?",
     "Options": ['5.50', '6.00', '6.50', '7.00', '7.50'],
     "Images": ['Test1_image_Page32_1.png'],
     "Solution": "Explanation: We can see that 2002 has a missing figure. We are told that the year totals to 38. Therefore, we need to subtract the other figures of the year to determine the remainder. 38 - 15.5 - 4.5 -10.5 = 7.5",
@@ -293,7 +293,7 @@ export const test1 = [
     "type": 1
   },
   {
-    "Question": "Eggs sells for $0.15 each and a Milk carton sells for $0.60. How many more Eggs can you buy than Milk cartons with $3.00 ?",
+    "Question": "Eggs sells for $0.15 each and a Milk carton sells for $0.60. How many more Eggs can you buy than Milk cartons with $3.00?",
     "Options": ['3', '6', '9', '12', '15'],
     "Images": [],
     "Solution": "Step 1: 3.00 / 0.60 = 5 Step 2: 3.00 / 0.15 = 20 Step 3: 20 - 5 = 15",
@@ -341,7 +341,7 @@ export const test1 = [
     "type": 1
   },
   {
-    "Question": "The seventh object, a watch, is placed in one of the four boxes. Which box is it placed in?",
+    "Question": "The seventh object, a watch, is placed in one of the four boxes.Which box is it placed in?",
     "Options": ['Left', 'Centre Left', 'Centre Right', 'Right'],
     "Images": ['Test1_image_Page43_1.png'],
     "Solution": "Step 1: The hammer is in the right box. The frying pan and microphone are in the left box. Therefore, these two boxes are covered. Step 2: The radio is in the same box with the microphone. Therefore, it is in the left box also. Step 3: Lastly, the cup and toy are in the box next to one with the radio. Since the radio is in the left box, the box next to it is the centre left box. Therefore, the centre box has nothing in it. Since each box mut contain at least 1 object, the seventh object, the watch must be placed in the centre right box.",
@@ -381,7 +381,7 @@ export const test1 = [
     "type": 1
   },
   {
-    "Question": "Croissants sells for $0.70 and Pain au Chocolat sells for $0.80. How many more Croissants can you buy than Pain au Chocolats with $28.00 ?",
+    "Question": "Croissants sells for $0.70 and Pain au Chocolat sells for $0.80.How many more Croissants can you buy than Pain au Chocolats with $28.00?",
     "Options": ['2', '3', '4', '5', '6'],
     "Images": [],
     "Solution": "Step 1: 28.00 / 0.70 = 40 Step 2: 28.00 / 0.80 = 35 Step 3: 40 - 35 = 5",

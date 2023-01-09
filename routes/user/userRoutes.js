@@ -3,6 +3,7 @@ import StartTest from '../../controllers/user/StartTest.js';
 import { userCV } from '../../controllers/user/userCV.js';
 import { userDetails } from '../../controllers/user/userDetails.js';
 import { userModal } from '../../models/UserSchema.js';
+import { createdTestModel } from '../../models/CreatedTestSchema.js';
 import { testModel } from '../../models/testSchema.js';
 import CalculateScore from '../../controllers/user/CalculateScore.js';
 import { userDetailsFormSchemaWithoutCV, userTestSchema } from '../../utils/YupSchemas.js';
@@ -33,61 +34,98 @@ userRouter.post("/StartTest", async (req, res) => {
         let isTestAlreadyAvailable = false;
 
         const user = await userModal.findOne({ email: email, _id: userID });
+
+        const createdTest = await createdTestModel.findOne({ country: user.country, position: user.position })
+
+        if (!createdTest) return res.status(404).json({ success: false, msg: "No Test found for your location/position" });
+
         const test = await testModel.findOne({ email: email, userID: userID });
 
+
         if (!user) return res.status(401).json({ success: false, msg: "User not found!!" });
+        else if (test?.isTestCompleted)
+            return res.status(403).json({
+                success: false, msg: "Test already given!!",
+                testCompleted: true
+            });
 
-        else if (test?.isTestCompleted) return res.status(403).json({ success: false, msg: "Test already given!!", testCompleted: true });
-
-        else if (test?.retest >= 3) {
-            return res.status(403).json({ success: false, msg: 'You have exhausted your retest limit, please contact the admin', retestExhausted: true })
+        else if (test?.retest >= 3) {//change once done to 3
+            return res.status(403).json({
+                success: false,
+                msg: 'You have exhausted your retest limit, please contact the admin',
+                retestExhausted: true
+            })
         }
 
         else if (test?.isTestStarted) {
             isTestAlreadyAvailable = true;
         };
 
-        const size = 50;
-        StartTest(userID, email, res, size, { isTestAlreadyAvailable, testID: test?._id });
+
+        const size = 50; //change once done to 50
+        StartTest(userID, user.country, email, res, size, {
+            isTestAlreadyAvailable,
+            testID: test?._id, testType: createdTest.test_type
+        });
     }
     catch (error) {
         console.log(error)
         return res.status(500).json({ success: false, msg: "Unexpected error occurred, or user not found" })
     }
 });
-
-
-userRouter.post("/getQuestionFromId", async (req, res) => {
+userRouter.post("/typing-start", async (req, res) => {
     try {
         const { testID, userID } = req.body;
+        const userTestDoc = await testModel.find({ _id: testID, userID: userID }).select({ isTestStarted: 1, testType: 1 });
+        const { isTestStarted, testType } = userTestDoc[0];
+
+        if (!isTestStarted) {
+            userTestDoc[0].isTestStarted = true;
+            await userTestDoc[0].save();
+        }
+        return res.status(200).json({ success: true })
+    }
+    catch (error) {
+        console.error(error)
+        return res.status(500).json({ success: false, msg: "Unexpected error occurred" })
+    }
+});
+
+userRouter.post("/getQuestionFromId", async (req, res) => {
+
+    try {
+        const { testID, userID, isTypingTest } = req.body;
+
         if (!testID || !userID) return res.status(404).json({ success: false, msg: 'Cannot find the user or his test' });
 
-        const userTestDoc = await testModel.find({ _id: testID, userID: userID }).select({ Questions: 1, retest: 1, isTestStarted: 1 });
-        const { Questions, retest, isTestStarted } = userTestDoc[0];
+        const userTestDoc = await testModel.find({ _id: testID, userID: userID }).select({ Questions: 1, retest: 1, isTestStarted: 1, testType: 1 });
+        const { Questions, retest, isTestStarted, testType } = userTestDoc[0];
 
         if (retest >= 3) {
-
             return res.status(429).json({ success: false, msg: 'You have exhausted your retest limit, please contact the admin', retestExhausted: true })
         }
-
-        if (isTestStarted) {
+        if (isTestStarted && testType !== 4) {
             return res.status(406).json({ success: false, msg: 'You already started the test', isTestStarted: isTestStarted })
         }
 
         else {
-            const questionsWithOptions = Questions.map(q => {
-                const { _id, Question, Options, Images } = q;
-                return { _id, Question, Options, Images }
-            })
-
-            userTestDoc[0].retest += 1;
+            if (testType !== 4)
+                userTestDoc[0].retest += 1;
             userTestDoc[0].isTestStarted = true;
             await userTestDoc[0].save();
+
+            if (isTypingTest) return res.status(200).json({ success: true })
+
+            const questionsWithOptions = Questions.map(q => {
+                const { _id, Question, Options, Images, testType } = q;
+                return { _id, Question, Options, Images, testType }
+            })
+
             return res.status(200).json({ success: true, data: questionsWithOptions })
         }
     }
     catch (error) {
-        console.log(error)
+        console.error(error)
         return res.status(500).json({ success: false, msg: "Unexpected error occurred" })
     }
 });
@@ -154,38 +192,50 @@ userRouter.post('/url', (req, res) => {
 
 userRouter.route("/getposition").post(async (req, res) => {
     let country;
-    let positionIndia = ['Company Secretary', 'Chartered Accountant', 'Administrative Assistant', 'Lawyer', 'HR Manager', 'Full Stack Developer', 'Head of Security'];
-    let positionOtherCountries = ['Virtual Assistant', 'Senior Virtual Assistant']
+
+    //let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant'];
+    let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer',];//'Mcq', 'Typing'
+    let positionOtherCountries = ['Virtual Assistant', 'Senior Virtual Assistant', 'IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant']
 
     try {
-        // const ip = req.ip
-        var ip = req.headers["x-forwarded-for"];
-        if (ip){
-          var list = ip.split(",");
-          ip = list[list.length-1];
-        } else {
-          ip = req.ip;
-        }
+        const ip = req.ip
         country = await getCountry(ip);
+        let createdTest = await createdTestModel.find({ country }).select({ position: 1 })
+        console.log("country ==", country, ip);
 
-        if (country.toLowerCase() === 'india') {
-            return res.json({ data: positionIndia, success: true });
-        } else {
-            return res.json({ data: positionOtherCountries, success: true })
-        }
+        return res.json({ data: createdTest, success: true });
+        // if (country.toLowerCase() === 'india') {
+        // } else {
+        //     return res.json({ data: createdTest, success: true })
+        // }
     }
     catch (error) {
-        return res.status(400).json({ data: positionOtherCountries, success: false, msg: 'Failed to find your country', ip: req.ip })
+        console.log("error", error.toString());
+        return res.status(400).json({ data: [], success: false, msg: 'Failed to find your country' })
     }
 });
 
+userRouter.route("/getTestType").post(async (req, res) => {
+    const { userID } = req.body;
+    try {
+        const user = await userModal.findOne({ _id: userID });
+        let createdTest = await createdTestModel.findOne({ country: user.country, position: user.position }).select({ test_type: 1 })
 
-// userRouter.post("/submitTypingTest", (req, res) => {
-//     const { userID, score } = req.body;
-//     if (!userID || !score) return res.status(400).json({ error: "Invalid user details", success: false })
+        if (createdTest) {
+            return res.json({ data: createdTest.test_type, success: true });
+        }
+        else res.status(400).json({ success: false, msg: 'No test type exits' })
+    } catch (error) {
+        console.log(error)
+    }
+});
+userRouter.post("/submitTypingTest", (req, res) => {
+    const { userID, wpm, accuracy, testID } = req.body;
 
-//     SubmitTypingTest(userID, score, res);
-// })
+    if (!userID || !wpm) return res.status(400).json({ error: "Invalid user details", success: false })
+
+    SubmitTypingTest(userID, testID, wpm, accuracy, res);
+})
 
 
 export default userRouter;
