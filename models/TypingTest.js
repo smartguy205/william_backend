@@ -5,10 +5,22 @@ const TestSchema = new Schema({
         type: String,
         required: true
     },
-    score: {
+    wpm: {
         type: Number,
         default: 0
-    }
+    },
+    accuracy: {
+        type: Number,
+        default: 0
+    },
+    testID: {
+        type: String,
+        required: true
+    },
+    testType: {
+        type: Number,
+        default: 0
+    },
 },
     { timestamps: true }
 );

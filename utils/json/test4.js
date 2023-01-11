@@ -56,7 +56,7 @@ export const test4 = [
     "Type": 4
   },
   {
-    "Question": "The investigator explored the abandoned building and was scared by all of the paranormal activity. After that, he was a _____ believer in ghosts.",
+    "Question": "The investigator explored the abandoned building and was scared by all of the paranormal activity. After that, he was a_____ believer in ghosts.",
     "Options": ['firm', 'scrap', 'game', 'ragged', 'liable'],
     "Images": [],
     "Solution": "Explanation: Scrap and game do not make much sense. Ragged believer makes sense, but it quite odd. A liable believer also is peculiar. Firm is when someone shows strength, so as a firm believer in ghosts - this works best and as such is the correct answer.",
@@ -64,7 +64,7 @@ export const test4 = [
     "Type": 4
   },
   {
-    "Question": "A budget of $25,000 covers 50% of a single electric motorbike production cost. How much money will be required to produce 3 electric motorbikes?",
+    "Question": "A budget of $25,000 covers 50% of a single electric motorbike production cost. How much money will be required to produce 3electric motorbikes?",
     "Options": ['$75,000', '$100,000', '$125,000', '$150,000', '$175,000'],
     "Images": [],
     "Solution": "Explanation: 25,000 = 50%, therefore 100% = 50,000 50,000 * 3 = 150,000",
@@ -120,7 +120,7 @@ export const test4 = [
     "Type": 4
   },
   {
-    "Question": "How many more jobs in the creative industries were there in S.East and S.West than in N.East and N.West?",
+    "Question": "How many more jobs in the creative industries were there in S.East and S. West than in N. East and N. West?",
     "Options": ['241', '253', '265', '277', '289'],
     "Images": ['Test4_image_Page16_1.png'],
     "Solution": "Explanation: Simply locate the figures of from S. East & S. West and N. East & N. West, which can be found using the bar graph. 453 and 176, respectively. Subtract the least by the most. 453 - 176 = 277",
@@ -168,7 +168,7 @@ export const test4 = [
     "Type": 4
   },
   {
-    "Question": "Basketballs sell for $20, and baseballs sell for $5. How many more baseballs can you buy than basketballs with $120.00 ?",
+    "Question": "Basketballs sell for $20, and baseballs sell for $5. How many more baseballs can you buy than basketballs with $120.00?",
     "Options": ['10', '12', '14', '16', '18'],
     "Images": [],
     "Solution": "Step 1: 120.00 / 20.00 = 6 Step 2: 120.00 / 5.00 = 24 Step 3: 24 - 6 = 18",
@@ -248,7 +248,7 @@ export const test4 = [
     "Type": 4
   },
   {
-    "Question": "Dumbbell sets sell for $70, and Resistance band sets sell for $30. How many more Dumbbell sets can you buy than Resistance band sets with $210 ?",
+    "Question": "Dumbbell sets sell for $70, and Resistance band sets sell for$30. How many more Dumbbell sets can you buy than Resistance band sets with $210?",
     "Options": ['2', '4', '5', '6', '8'],
     "Images": [],
     "Solution": "Step 1: 210 / 70 = 3 Step 2: 210 / 30 = 7 Step 3: 7 - 3 = 4",
@@ -376,7 +376,7 @@ export const test4 = [
     "Type": 4
   },
   {
-    "Question": "Statement 1: The office requires new paper. Statement 2: Stationary items include scissors and pens. Conclusion: The office requires new stationary.",
+    "Question": "Statement 1: The office requires new paper.Statement 2: Stationary items include scissors and pens.Conclusion: The office requires new stationary.",
     "Options": ['True', 'False', 'Cannot Say'],
     "Images": [],
     "Solution": "Explanation: The first statement says that the office requires new paper. The second statement says that stationary items include scissors and pens but there is no mention of paper. The conclusion that the office requires new stationary is neither true nor false because while we know the office requires new paper, we do not know whether it requires any new scissors or pens. Therefore, it is cannot say.",

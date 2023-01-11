@@ -40,6 +40,10 @@ const TestSchema = new Schema({
         type: Number,
         default: 0
     },
+    testType: {
+        type: Number,
+        default: 0
+    },
     isTestCompleted: {
         type: Boolean,
         default: false
@@ -48,10 +52,7 @@ const TestSchema = new Schema({
         type: Boolean,
         default: false
     },
-    isSentToSlack: {
-        type: Boolean,
-        default: false
-    }
+
 },
     { timestamps: true }
 );

@@ -1,29 +1,32 @@
 import mongoose from "mongoose";
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 const excelSchema = new Schema({
-    Question:{
-        type:String,
-        required:true
+    Question: {
+        type: String,
+        required: true
     },
-    Options:{
-        type:[String],
-        required:true
+    Options: {
+        type: [String],
+        required: true
     },
-    Images:{
-        type:[String]
+    Images: {
+        type: [String]
     },
-    Solution:{
-        type:String,
-        required:true
+    Solution: {
+        type: String,
+        required: true
     },
-    Answer:{
-        type:String,
-        required:true
+    Answer: {
+        type: String,
+        required: true
     },
-    type:{
-        type:Number,
-    }
+    type: {
+        type: Number,
+    },
+    QuestionsArr: {
+        type: Object,
+    },
 });
 
 

@@ -64,7 +64,7 @@ export const test3 = [
     "Type": 3
   },
   {
-    "Question": "In millions, how many more people Phobos than Deimos in 2115?",
+    "Question": "In millions, how many more people Phobos than Deimos in2115?",
     "Options": ['25.5', '27.4', '29.5', '31.8', '33.0'],
     "Images": ['Test3_image_Page9_1.png'],
     "Solution": "Explanation: Simply locate the figures of Phobos and Deimos. 50 and 20.5, respectively. Subtract the least by the most. 50 - 20.5 = 29.5",
@@ -88,7 +88,7 @@ export const test3 = [
     "Type": 3
   },
   {
-    "Question": "In millions, how many more people visited Titan than Io in 2115?",
+    "Question": "In millions, how many more people visited Titan than Io in2115?",
     "Options": ['5.8', '7.0', '7.6', '8.5', '9.2'],
     "Images": ['Test3_image_Page12_1.png'],
     "Solution": "Explanation: Simply locate the figures from Io and Titan, 7.7 and 14.7 respectively. Subtract Io from Titan: 14.7 - 7.7 = 7",
@@ -104,7 +104,7 @@ export const test3 = [
     "Type": 3
   },
   {
-    "Question": "Fills in the missing words: The professor did his best to make sure he was deliberately ______ as he gave his lecture. This way, his students could not understand him, and he was able to continue pretending that he knew what he was talking about. In fact, he didn't know his ______ very well, as he was a poor professor.",
+    "Question": "Fills in the missing words: The professor did his best to make sure he was deliberately______ as he gave his lecture. This way, his students could not understand him, and he was able to continue pretending that he knew what he was talking about. In fact, he didn't know his______ very well, as he was a poor professor.",
     "Options": ['confusing, subject', 'hard, light', 'diagram, topic', 'provocative, shareholder', 'revise, guideline'],
     "Images": [],
     "Solution": "Explanation: For our first missing word we have: confusing, hard, diagram, provocative, and revise. Revise doesn't work. Hard works but It's a little awkward as it doesn't quite make sense in the rest of the context, but it works. Confusing works well and makes sense in the context, as does provocative. Diagram doesn't quite work. For our second missing word we have: subject, light, topic, shareholder and guideline. Light, shareholder and guideline do not make sense. Topic makes sense but its preceding word in the pair does not so this is not the answer. Subject works well and make sense in the context and the preceding word in the pair works. Therefore, this is the pair 'confusing, subject.",
@@ -136,7 +136,7 @@ export const test3 = [
     "Type": 3
   },
   {
-    "Question": "Statement 1: Bryan and Tracy live in the same building. Statement 2: Chie lives in a different building than Bryan. Conclusion: Tracy lives in the same building as Chie.",
+    "Question": "Statement 1: Bryan and Tracy live in the same building.Statement 2: Chie lives in a different building than Bryan.Conclusion: Tracy lives in the same building as Chie.",
     "Options": ['True', 'False', 'Cannot Say'],
     "Images": [],
     "Solution": "Explanation: The first statement says that Bryan and Tracy live in the same building. The second that Chie lives in a different building to Bryan. Therefore, the conclusion that Tracy lives in the same building as Chie is not possible, as she lives in the same building as Bryan to which Chie does not. Therefore, the answer is false.",
@@ -160,7 +160,7 @@ export const test3 = [
     "Type": 3
   },
   {
-    "Question": "Hardback books sell for $20 and Paperback books sell for $10. How many more Paperback books can you buy than Hardback books with $180 ?",
+    "Question": "Hardback books sell for $20 and Paperback books sell for $10.How many more Paperback books can you buy than Hardback books with $180?",
     "Options": ['5', '6', '8', '9', '10'],
     "Images": [],
     "Solution": "Step 1: 180 / 20 = 9 Step 2: 180 / 10 = 18 Step 3: 18 - 9 = 9",
@@ -192,7 +192,7 @@ export const test3 = [
     "Type": 3
   },
   {
-    "Question": "Alina reads at a constant speed of 1 page every 2 minutes. How many hours will it take her to read a book the length of 360 pages?",
+    "Question": "Alina reads at a constant speed of 1 page every 2 minutes. How many hours will it take her to read a book the length of 360pages?",
     "Options": ['6 hours', '8 hours', '10 hours', '12 hours', '14 hours'],
     "Images": [],
     "Solution": "Explanation: 360 / 60 = 6 6 x 2 = 12",
@@ -232,7 +232,7 @@ export const test3 = [
     "Type": 3
   },
   {
-    "Question": "The thick foam sat at the top of coffee mug but was slowly ________ as it had been left out for too long.",
+    "Question": "The thick foam sat at the top of coffee mug but was slowly________ as it had been left out for too long.",
     "Options": ['Exploiting', 'Shelling', 'Orbiting', 'Collapsing', 'Stumbling'],
     "Images": [],
     "Solution": "Explanation: The sentence requires a word that fits with what is happening to the foam in the coffee mug. 'Exploiting' and 'shelling' do not make much sense. 'Orbiting' could perhaps work but seems awkward given that the foam wouldn't really orbit the mug. Likewise, with 'stumbling'. 'Collapsing' therefore seems to describe what would happen to the foam, slowly, since it had been left out for too long. As a result, it is the correct answer.",
@@ -328,7 +328,7 @@ export const test3 = [
     "Type": 3
   },
   {
-    "Question": "Handwash sells for $1.75 per carton, and Shower gel sells for $2.50 per carton. How many more cartons of Handwash can you buy than Shower gel with $35.00?",
+    "Question": "Handwash sells for $1.75 per carton, and Shower gel sells for$2.50 per carton. How many more cartons of Handwash can you buy than Shower gel with $35.00?",
     "Options": ['3', '4', '5', '6', '8'],
     "Images": [],
     "Solution": "Step 1: 35.00 / 2.50 = 14 Step 2: 35.00 / 1.75 = 20 Step 3: 20 - 14 = 6",
