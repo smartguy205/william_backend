@@ -199,6 +199,7 @@ userRouter.route("/getposition").post(async (req, res) => {
 
     try {
         const ip = req.ip
+
         country = await getCountry(ip);
         let createdTest = await createdTestModel.find({ country }).select({ position: 1 })
         console.log("country ==", country, ip);
