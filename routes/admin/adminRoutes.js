@@ -32,8 +32,17 @@ adminRouter.delete("/job/:id", (req, res) => {
 
 adminRouter.get("/jobs/:position", async (req, res) => {
     const { position } = req.params;
-    const ip = req.ip
+    // const ip = req.ip
     try {
+        var ip = req.headers["x-forwarded-for"];
+
+        if (ip) {
+            var list = ip.split(",");
+            ip = list[list.length - 1];
+
+        } else {
+            ip = req.ip;
+        }
         let country = await getCountry(ip);
         getJobsForAUser({ country, position }, res)
     } catch (e) { console.error("err", e.toString()) }
