@@ -198,8 +198,14 @@ userRouter.route("/getposition").post(async (req, res) => {
     let positionOtherCountries = ['Virtual Assistant', 'Senior Virtual Assistant', 'IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant']
 
     try {
-        const ip = req.ip
 
+        var ip = req.headers["x-forwarded-for"];
+        if (ip) {
+            var list = ip.split(",");
+            ip = list[list.length - 1];
+        } else {
+            ip = req.ip;
+        }        // const ip = req.ip
         country = await getCountry(ip);
         let createdTest = await createdTestModel.find({ country }).select({ position: 1 })
         console.log("country ==", country, ip);
