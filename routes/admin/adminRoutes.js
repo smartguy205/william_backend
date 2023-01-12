@@ -3,14 +3,12 @@ import login from '../../controllers/admin/login.js';
 import uploadExcelToDB from '../../controllers/admin/uploadExcelToDB.js';
 import { testModel } from '../../models/testSchema.js';
 import { userModal } from '../../models/UserSchema.js';
-import { typingTest } from "../../models/TypingTest.js"
-
 import { feedbackModal } from '../../models/FeedbackSchema.js';
-const adminRouter = express.Router();
 import { addJobs, getJobs, deleteJob, getJobsForAUser } from '../../controllers/admin/jobs.js';
 import { test1 } from '../../utils/json/test1.js';
 import { getCountry } from '../../controllers/user/userDetails.js';
 import { getPosition, addPosition, deletePosition } from '../../controllers/admin/position.js';
+const adminRouter = express.Router();
 // import { addCountry, getCountries, deleteCountry } from '../../controllers/admin/country.js';
 
 
@@ -34,8 +32,17 @@ adminRouter.delete("/job/:id", (req, res) => {
 
 adminRouter.get("/jobs/:position", async (req, res) => {
     const { position } = req.params;
-    const ip = req.ip
+    // const ip = req.ip
     try {
+        var ip = req.headers["x-forwarded-for"];
+
+        if (ip) {
+            var list = ip.split(",");
+            ip = list[list.length - 1];
+
+        } else {
+            ip = req.ip;
+        }
         let country = await getCountry(ip);
         getJobsForAUser({ country, position }, res)
     } catch (e) { console.error("err", e.toString()) }
@@ -84,22 +91,13 @@ adminRouter.post("/getTestDetails", async (req, res) => {
     try {
         const user = await userModal.find().lean().select({ __v: 0 });
         const test = await testModel.find({ isTestCompleted: true }).lean().select({ Questions: 0, email: 0, __v: 0 }).sort({ "updatedAt": -1 })
-        const typingTest1 = await typingTest.find().lean().select({ wpm: 1, accuracy: 1, userID: 1, testID: 1 }).sort({ "updatedAt": -1 })
-
-        // const typingtest = await typingTest.find(_id,)
 
         if (!user || !test) return res.status(404).json({ success: false, msg: "Cannot find user and his test details" });
 
-        // let userDataArr = user.map(userDetails => {
-        //     const testDetails = test.find(t => t.userID === userDetails._id.toString());
-        //     return testDetails !== undefined ? { ...userDetails, ...testDetails } : null
-        // }).filter(details => details);
-        // console.log({ typingTest1 })
         let UserTests = test.map(testDetails => {
 
             const userDetails = user.find(u => testDetails.userID === u._id.toString());
-            const typingTestScore = typingTest1.find(u => testDetails._id.toString() === u.testID);
-            return userDetails !== undefined ? { ...userDetails, ...testDetails, wpm: typingTestScore?.wpm, taccuracy: typingTestScore?.accuracy } : null
+            return userDetails !== undefined ? { ...userDetails, ...testDetails, wpm: testDetails?.typingTest?.wpm, taccuracy: testDetails?.typingTest?.typingAccuracy } : null
         }).filter(details => details);
 
 
@@ -123,7 +121,7 @@ adminRouter.post("/getUserPaper", async (req, res) => {
         const test = await testModel.findOne({ userID: id }, { _id: 0, userID: 0, __v: 0, Questions: 0, email: 0, retest: 0, isTestCompleted: 0, isTestStarted: 0, createdAt: 0 });
         const user = await userModal.findOne({ _id: id }, { _id: 0, __v: 0, });
         const userFeedback = await feedbackModal.findOne({ userID: id }, { text: 1 });
-        const typingTest1 = await typingTest.findOne({ userID: id });
+
         if (!test || !user) return res.status(404).json({ success: false, msg: "Failed to find the user or his test" });
 
         const { fullName, email, phone, country, language, position, experience, file, ip } = user;
@@ -136,7 +134,7 @@ adminRouter.post("/getUserPaper", async (req, res) => {
 
         const User = {
             fullName, email, phone, country, language, position, experience, file,
-            score, testType, wpm: typingTest1?.wpm, taccuracy: typingTest1?.accuracy, questionsAttempted, correctAnswers, averageTime, accuracy, date,
+            score, testType, wpm: test?.typingTest?.wpm, taccuracy: test?.typingTest?.typingAccuracy, questionsAttempted, correctAnswers, averageTime, accuracy, date,
             feedback, ip
         };
 

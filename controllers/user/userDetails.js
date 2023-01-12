@@ -32,7 +32,16 @@ export const getCountry = (ip) => {
 export const userDetails = async (data, req, res) => {
     let country;
     try {
-        const ip = req.ip
+        // const ip = req.ip
+        var ip = req.headers["x-forwarded-for"];
+
+        if (ip) {
+            var list = ip.split(",");
+            ip = list[list.length - 1];
+
+        } else {
+            ip = req.ip;
+        }
         country = await getCountry(ip);
     }
     catch (error) {
