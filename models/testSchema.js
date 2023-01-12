@@ -9,6 +9,7 @@ const TestSchema = new Schema({
         type: String,
         required: true
     },
+
     score: {
         type: Number,
         default: 0
@@ -53,6 +54,18 @@ const TestSchema = new Schema({
         default: false
     },
 
+    typingTest: {
+        type: Object,
+        default: undefined,
+        wpm: {
+            type: Number,
+            default: 0
+        },
+        typingAccuracy: {
+            type: Number,
+            default: 0
+        }
+    }
 },
     { timestamps: true }
 );
