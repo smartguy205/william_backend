@@ -1,5 +1,4 @@
 import { testModel } from "../../models/testSchema.js"
-import { typingTest } from "../../models/TypingTest.js"
 import { userModal } from "../../models/UserSchema.js"
 import { sendUserDetailsToSlack } from '../user/CalculateScore.js';
 
@@ -15,30 +14,17 @@ const SubmitTypingTest = async (userID, testID, wpm, accuracy, res) => {
 
         else {
             const testType = updateRes?.testType ?? 2;
-            // save the user id and score in the typing test collection
-            let TypingTestDoc = new typingTest({
-                userID,
-                testID,
-                wpm,
-                accuracy,
-                testType
-            })
+
+            const typingTest = { wpm, typingAccuracy: accuracy }
             if (testType === 2 || testType === 3) {
 
-                const t = await testModel.findOneAndUpdate({ userID, testID }, { isTestCompleted: true })
-
-                sendUserDetailsToSlack(userID, { fullName: user.fullName, email: user.email, file: user.file, wpm, accuracy });
-
+                const t = await testModel.findOneAndUpdate({ userID, testID }, { isTestCompleted: true, typingTest })
+                sendUserDetailsToSlack(userID, { fullName: user.fullName, email: user.email, file: user.file, typingTest });
             }
-            await TypingTestDoc.save((err) => {
-                if (err) {
-                    console.log(err.toString())
-                    return res.status(500).json({ error: "Unexpected Internal Server Error Occurred", success: false })
-                }
-                else {
-                    return res.json({ error: "Your typing test has been submitted", testType, success: true })
-                }
-            })
+            const t = await testModel.findOneAndUpdate({ userID, testID }, { typingTest })
+
+            return res.json({ error: "Your typing test has been submitted", testType, success: true })
+
         }
     }
     catch (error) {

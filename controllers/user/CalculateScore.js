@@ -1,6 +1,5 @@
 import { testModel } from "../../models/testSchema.js";
 import { userModal } from "../../models/UserSchema.js";
-import { typingTest } from '../../models/TypingTest.js';
 import axios from 'axios';
 
 const CalculateScore = async (userID, userQuestions, res) => {
@@ -74,15 +73,15 @@ export const sendUserDetailsToSlack = async (userID, userData) => {
     try {
         const testData = await testModel.findOne({ userID }).select({ score: 1, isTestCompleted: 1, testType: 1 })
 
-        const typingTestData = await typingTest.findOne({ userID })
+        // const typingTestData = await typingTest.findOne({ userID })
 
         if (!testData || !userData || !testData.isTestCompleted) return false
         let msgData = {
             text: `Name: ${userData.fullName}.
 \nEmail: ${userData.email}.
 \nMCQS Score: ${testData.score ?? '-'}.\n
-Words/min : ${userData?.wpm ?? typingTestData?.wpm ?? '-'}\n 
-Accuracy : ${userData?.accuracy ?? typingTestData?.accuracy ?? '-'}\n
+Words/min : ${userData?.wpm ?? '-'}\n 
+Accuracy : ${userData?.typingTest ?? '-'}\n
 \nCV: ${userData.file || "Not Found"}\n\n`
         };
 
