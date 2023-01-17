@@ -109,8 +109,8 @@ userRouter.post("/getQuestionFromId", async (req, res) => {
         }
 
         else {
-            if (testType !== 4)
-                userTestDoc[0].retest += 1;
+            //if (testType !== 4)
+            userTestDoc[0].retest += 1;
             userTestDoc[0].isTestStarted = true;
             await userTestDoc[0].save();
 
