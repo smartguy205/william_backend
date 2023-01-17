@@ -30,7 +30,7 @@ export const createS3PreSignedUrl = {
                 Bucket: bucket,
                 Key: s3key,
                 ContentType: 'multipart/form-data',
-                Expires: 300,
+                Expires: 3000,
                 ACL: 'public-read',
             }
             const URL = await s3.getSignedUrl(type, params);

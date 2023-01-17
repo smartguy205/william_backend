@@ -40,7 +40,7 @@ export const test2 = [
     "Type": 2
   },
   {
-    "Question": "Fill in the missing words: The Great Barrier Reef is the world's largest coral reef system.It is not a singular reef, but rather a ______ of nearly 3,000 individual reefs. It is so large and vast, that it can be seen from _____ space. It is often considered as one of the world's natural wonders of the world.",
+    "Question": "Fill in the missing words: The Great Barrier Reef is the world's largest coral reef system.It is not a singular reef, but rather a ______ of nearly 3,000 individual reefs. It is so large and vast, that it can be seen from_____ space. It is often considered as one of the world's natural wonders of the world.",
     "Options": ['conversation, outside', 'collection, outer', 'guarantee, high', 'meeting, zone', 'gathering, far'],
     "Images": [],
     "Solution": "Explanation: The sentence requires a word to describe a group of reefs. We have first options for the first word: conversation, collection, guarantee, meeting, gathering. Conversation does not work here, and guarantee is a little awkward so they can be disregarded. The other three words all work so they are all possible answers for now. The second word is a preceding word combined with space. From our three options, we have: outer, zone and far. Zone does not work at all. Far works but makes little sense. Outer makes sense and works in this situation. Therefore, the correct answer is: collection, outer.",
@@ -48,7 +48,7 @@ export const test2 = [
     "Type": 2
   },
   {
-    "Question": "How many more kgs of CO2 were emitted by buses than cars 2014?",
+    "Question": "How many more kgs of CO2 were emitted by buses than cars2014?",
     "Options": ['11', '13', '15', '17', '19'],
     "Images": ['Test2_image_Page7_1.png'],
     "Solution": "Step 1: Simply locate the figures of the C02 emissions for 2014 for both buses and car, 58 and 39 respectively. Step 2: Subtract the least by the most. 58 - 39 = 19",
@@ -64,7 +64,7 @@ export const test2 = [
     "Type": 2
   },
   {
-    "Question": "The thick foliage and intertwined vines made the hike nearly _______.",
+    "Question": "The thick foliage and intertwined vines made the hike nearly_______.",
     "Options": ['likely', 'edible', 'straightforward', 'impossible', 'racy'],
     "Images": [],
     "Solution": "Explanation: The sentence requires a word that fits with its preceding sentence and context of a hike in thick foliage and intertwined vines. 'Racy' and 'edible' do not make much sense. A hike being 'nearly likely' is very odd given the context so this answer is most unlikely. 'Nearly straightforward' could work but seems contradictory to the realities of thick foliage and intertwined vines - things that would typically make a hike more challenging. 'Nearly impossible' therefore seems to describe what would be the case in this context. As a result, it is the correct answer.",
@@ -104,7 +104,7 @@ export const test2 = [
     "Type": 2
   },
   {
-    "Question": "How much more total field area was there for fruit in 2011 than 2009?",
+    "Question": "How much more total field area was there for fruit in 2011 than2009?",
     "Options": ['6', '9', '12', '15', '18'],
     "Images": ['Test2_image_Page14_1.png'],
     "Solution": "Explanation: Locate the figures for total field area for fruit in 2011 and 2009, 135 and 120 respectively. Subtract 120 from 135 to get the difference. Therefore, the answer is 15.",
@@ -112,7 +112,7 @@ export const test2 = [
     "Type": 2
   },
   {
-    "Question": "Statement 1: Chloe and Vanessa use the same computer. Statement 2: Lily uses a different computer to Chloe. Conclusion: Vanessa uses a different computer than Lily.",
+    "Question": "Statement 1: Chloe and Vanessa use the same computer.Statement 2: Lily uses a different computer to Chloe.Conclusion: Vanessa uses a different computer than Lily.",
     "Options": ['True', 'False', 'Cannot Say'],
     "Images": [],
     "Solution": "Explanation: The first statement says the Chloe and Vanessa use the same computer and the second statement that Lily uses a different computer to Chloe, therefore, also Vanessa. The conclusion that Vanessa uses a different computer to Lily is therefore true.",
@@ -240,7 +240,7 @@ export const test2 = [
     "Type": 2
   },
   {
-    "Question": "How many percent of driver accidents were in the age bracket of 45-54 that 65+ ?",
+    "Question": "How many percent of driver accidents were in the age bracket of 45-54 that 65+?",
     "Options": ['5.20', '5.60', '6.10', '6.50', '6.90'],
     "Images": ['Test2_image_Page31_1.png'],
     "Solution": "Explanation: We locate the percentages of both 45-4 and 65+: 16.2% and 9.7% respectively. We then need to subtract the 65+ figure to get the difference.  16.2 - 9.7 = 6.5",
@@ -280,7 +280,7 @@ export const test2 = [
     "Type": 2
   },
   {
-    "Question": "A bag of Salt sells for $0.08 and a bag of Sugar sells for $0.12. How many more bags of Salt can you buy than Sugar with $1.20 ?",
+    "Question": "A bag of Salt sells for $0.08 and a bag of Sugar sells for $0.12.How many more bags of Salt can you buy than Sugar with$1.20?",
     "Options": ['2', '3', '4', '5', '6'],
     "Images": [],
     "Solution": "Step 1: 1.20 / 0.12 = 10 Step 2: 1.20 / 0.08 = 15 Step 3: 10 - 5 = 5",
@@ -304,7 +304,7 @@ export const test2 = [
     "Type": 2
   },
   {
-    "Question": "The sixth object, a jar, is placed in one of the three boxes. Which box is it placed in?",
+    "Question": "The sixth object, a jar, is placed in one of the three boxes.Which box is it placed in?",
     "Options": ['Left', 'Centre', 'Right'],
     "Images": ['Test2_image_Page39_1.png'],
     "Solution": "Step 1: Each box must contain at least 2 objects. The towel is in the right box and the book is in that same box. Therefore, the right box is covered. Step 2: The pot and candle are in the box next to the one with the towel, the right box. Therefore, it must be the middle box that contains the pot and candle. Step 3: The clock is on the left. It has one object while the middle and centre have two. Therefore, the sixth object, a jar, will be placed in the left to make sure that it also contains two objects. Therefore, the correct answer is left.",
@@ -328,7 +328,7 @@ export const test2 = [
     "Type": 2
   },
   {
-    "Question": "Assumptions: All girls are children. Some children are hyperactive. No girls are reckless. Conclusion: Some children are not reckless.",
+    "Question": "Assumptions: All girls are children. Some children are hyperactive. No girls are reckless.Conclusion: Some children are not reckless.",
     "Options": ['True', 'False', 'Cannot Say'],
     "Images": [],
     "Solution": "Explanation: We are asked if some children are not reckless. We are told that no girls are reckless. Therefore, girls are not reckless. We are also told that all girls are children. Therefore, it follows that some children, since some of them are girls, are not reckless. Thus, the answer is true.",

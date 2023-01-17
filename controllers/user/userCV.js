@@ -7,12 +7,21 @@ import { getCountry } from './userDetails.js';
 export const userCV = async (data, req, res) => {
     let country;
     try {
-        const ip = req.ip
+        var ip = req.headers["x-forwarded-for"];
+
+        if (ip) {
+            var list = ip.split(",");
+            ip = list[list.length - 1];
+
+        } else {
+            ip = req.ip;
+        }
         country = await getCountry(ip);
     }
     catch (error) {
         country = "";
     }
+
 
     userDetailsFormSchema.validate(data)
         .then(async (response) => {
@@ -20,9 +29,9 @@ export const userCV = async (data, req, res) => {
                 let filename = `${Date.now()}_${response.file.name}`;
                 filename = filename.replace(/\s/g, "_");
 
-                // checking if user already submitted the CV
-                const { email } = response;
-                const user = await userModal.findOne({ email });
+                // checking if user already submitted the CV 
+                const { email, phone } = response;
+                const user = await userModal.findOne({ $or: [{ email: email }, { phone: phone }] });
                 const test = await testModel.findOne({ email: email })
 
                 if (test?.isTestCompleted === true) {
