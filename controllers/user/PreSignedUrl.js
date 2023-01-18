@@ -19,7 +19,7 @@ export const createS3PreSignedUrl = {
         try {
             const type = 'putObject';
             let code = getUniqueCode(8);
-
+            console.log(res.body)
             if (!code) {
                 return res.status(400).json({ success: false, msg: "Cannot get unique code for the file" })
             }
@@ -30,12 +30,14 @@ export const createS3PreSignedUrl = {
                 Bucket: bucket,
                 Key: s3key,
                 ContentType: 'multipart/form-data',
-                Expires: 300,
+                // ContentType: 'application/pdf',
+                Expires: 3000,
                 ACL: 'public-read',
             }
             const URL = await s3.getSignedUrl(type, params);
+            //console.log("URL", URL);
+            let link = `https://${bucket}.s3.amazonaws.com/${s3key}`;
             // let link = `https://s3.console.aws.amazon.com/s3/object/${bucket}?region=us-east-1&prefix=${s3key}`;
-            let link = `https://${bucket}.s3.amazonaws.com/${s3key}`
 
             return res.json({ success: true, msg: "Url generated", url: URL, file: link })
         }

@@ -29,8 +29,12 @@ export const userSchema = new Schema({
         type: String,
         required: true
     },
+
+
+
     file: String,
-    ip: String
+    ip: String,
+
 }, { timestamps: true });
 
 export const userModal = new mongoose.model('user', userSchema);
