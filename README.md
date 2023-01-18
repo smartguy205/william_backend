@@ -1,6 +1,8 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Deploy To Production Server.
+1. To Deploy Server Application the Production Server push the latest code to the main branch. After pushing or merging the latest code to the main branch, the latest merged/pushed code will get updated to the latest server within 5 minutes.
+3. Link to the Production server (https://api.marketingmgmt.net/)
 
 ## Available Scripts
 
