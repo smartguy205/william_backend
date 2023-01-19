@@ -71,17 +71,15 @@ const CalculateScore = async (userID, userQuestions, res) => {
 // send the qualified users list to slack
 export const sendUserDetailsToSlack = async (userID, userData) => {
     try {
-        const testData = await testModel.findOne({ userID }).select({ score: 1, isTestCompleted: 1, testType: 1 })
-
-        // const typingTestData = await typingTest.findOne({ userID })
+        const testData = await testModel.findOne({ userID }).select({ typingTest: 1, score: 1, isTestCompleted: 1, testType: 1 })
 
         if (!testData || !userData || !testData.isTestCompleted) return false
         let msgData = {
-            text: `Name: ${userData.fullName}.
-\nEmail: ${userData.email}.
-\nMCQS Score: ${testData.score ?? '-'}.\n
-Words/min : ${userData?.wpm ?? '-'}\n 
-Accuracy : ${userData?.typingTest ?? '-'}\n
+            text: `Name: ${userData.fullName}.\n
+Email: ${userData.email}.\n
+MCQS Score: ${testData.score ?? '-'}.\n
+Words/min : ${testData?.typingTest?.wpm ?? '-'}\n 
+Accuracy : ${testData?.typingTest?.typingAccuracy ?? '-'}\n
 \nCV: ${userData.file || "Not Found"}\n\n`
         };
 
