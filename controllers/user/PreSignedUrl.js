@@ -40,6 +40,7 @@ export const createS3PreSignedUrl = {
             return res.json({ success: true, msg: "Url generated", url: URL, file: link })
         }
         catch (error) {
+            console.error(error.toString());
             return res.json({ success: false, error: "No Url generated", error })
         }
     }
