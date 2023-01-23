@@ -12,7 +12,17 @@ import { createS3PreSignedUrl } from '../../controllers/user/PreSignedUrl.js';
 import { getCountry } from '../../controllers/user/userDetails.js';
 import SubmitTypingTest from '../../controllers/user/TypingTest.js';
 const userRouter = express.Router();
+/*import { excelModal } from '../../models/ExcelSchema.js';
+import { QuestionsandAnswers } from "./USQuestions.js"
+userRouter.post("/db", async (req, res) => {
+    let records = await excelModal.find().lean();
 
+    records = records.map(async (r, i) => {
+        const QuestionsArr = { us: QuestionsandAnswers[i].Question }
+        return await excelModal.updateOne({ _id: r._id }, { QuestionsArr: QuestionsArr })
+    })
+    return res.status(200).json(records)
+})*/
 userRouter.post("/userCV", (req, res) => {
     try {
         let data = req.body.data;
@@ -63,16 +73,21 @@ userRouter.post("/StartTest", async (req, res) => {
 
 
         const size = 50; //change once done to 50
-        StartTest(userID, user.country, email, res, size, {
+        StartTest(userID, createdTest.language, email, res, size, {
             isTestAlreadyAvailable,
             testID: test?._id, testType: createdTest.test_type
         });
+        // StartTest(userID, user.country, email, res, size, {
+        //     isTestAlreadyAvailable,
+        //     testID: test?._id, testType: createdTest.test_type
+        // });
     }
     catch (error) {
         console.log(error)
         return res.status(500).json({ success: false, msg: "Unexpected error occurred, or user not found" })
     }
 });
+
 userRouter.post("/typing-start", async (req, res) => {
     try {
         const { testID, userID } = req.body;

@@ -8,22 +8,21 @@ const countryCode = {
     'uk': "UK"
 }
 
-const StartTest = async (userID, country, email, res, size, testObj) => {
+const StartTest = async (userID, language, email, res, size, testObj) => {
     try {
 
         let records = await excelModal.aggregate([{ $sample: { size: size } }]); //random questions
-        //let records = await excelModal.find().limit(size); //delete it once done
+        //let records = await excelModal.find().limit(size).lean(); //delete it once done
 
         if (records.length === size) {
             let testResponse;
 
             records = records.map(re => {
                 //let newObj = { ...re._doc, Question: re._doc?.QuestionsArr?.[countryCode[country.toLowerCase()]] ?? re._doc.Question }
-                let newObj = { ...re, Question: re?.QuestionsArr?.[countryCode[country.toLowerCase()]] ?? re.Question }
+                let newObj = { ...re, Question: re?.QuestionsArr?.[language.toLowerCase()] ?? re.Question }
                 delete newObj['QuestionsArr'];
                 return newObj;
             });
-
 
             if (testObj.isTestAlreadyAvailable === false) {
                 testResponse = await testModel.create({ userID, email, Questions: records, isTestStarted: false, testType: testObj?.testType });
