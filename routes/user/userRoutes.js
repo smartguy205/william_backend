@@ -45,7 +45,29 @@ userRouter.post("/StartTest", async (req, res) => {
 
         const user = await userModal.findOne({ email: email, _id: userID });
 
-        const createdTest = await createdTestModel.findOne({ country: user.country, position: user.position })
+        /*   const createdTest1 = await createdTestModel.find({
+               "$or": [{
+                   "country": user.country,
+                   "position": user.position
+               }, {
+                   "country": "All",
+                   "position": user.position
+               }]
+           })
+           return res.status(403).json({
+               success: true, createdTest1
+           });*/
+
+        //const createdTest = await createdTestModel.findOne({ country: user.country, position: user.position })
+        const createdTest = await createdTestModel.findOne({
+            "$or": [{
+                "country": user.country,
+                "position": user.position
+            }, {
+                "country": "All",
+                "position": user.position
+            }]
+        });
 
         if (!createdTest) return res.status(404).json({ success: false, msg: "No Test found for your location/position" });
 
@@ -73,9 +95,9 @@ userRouter.post("/StartTest", async (req, res) => {
 
 
         const size = 50; //change once done to 50
-        StartTest(userID, createdTest.language, email, res, size, {
+        StartTest(userID, createdTest?.language, email, res, size, {
             isTestAlreadyAvailable,
-            testID: test?._id, testType: createdTest.test_type
+            testID: test?._id, testType: createdTest?.test_type
         });
         // StartTest(userID, user.country, email, res, size, {
         //     isTestAlreadyAvailable,

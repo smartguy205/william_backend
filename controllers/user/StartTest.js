@@ -26,13 +26,13 @@ const StartTest = async (userID, language, email, res, size, testObj) => {
 
             if (testObj.isTestAlreadyAvailable === false) {
                 testResponse = await testModel.create({ userID, email, Questions: records, isTestStarted: false, testType: testObj?.testType });
-                return res.status(200).json({ success: true, msg: `${records.length} questions available for test`, testId: testResponse?._id.toString(), testType: testObj.testType })
+                return res.status(200).json({ success: true, msg: `${records.length} questions available for test`, testId: testResponse?._id.toString(), testType: testObj.testType, language })
             }
 
             testResponse = await testModel.findOneAndUpdate({ _id: testObj.testID },
                 { Questions: records, isTestStarted: false, testType: testObj.testType });
 
-            return res.status(200).json({ success: true, msg: `${records.length} questions available for test`, testId: testResponse?._id.toString(), testType: testObj.testType });
+            return res.status(200).json({ success: true, msg: `${records.length} questions available for test`, testId: testResponse?._id.toString(), testType: testObj.testType, language });
         }
         else {
             return res.status(404).json({ success: false, msg: "Cannot not find all the questions" })

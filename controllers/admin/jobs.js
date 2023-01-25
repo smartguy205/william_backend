@@ -3,9 +3,16 @@ import { createdTestModel } from "../../models/CreatedTestSchema.js";
 export const addJobs = async (job, res) => {
 
     //return res.status(200).json(data.length)
-    const findJobs = await createdTestModel.findOne({ country: job.country, position: job.position, language: job.language })
-    //const newdata = data.filter(d => findJobs.indexOf(d) === -1);
-    //return res.status(200).json(findJobs)
+    //const findJobs = await createdTestModel.findOne({ country: job.country, position: job.position })
+    const findJobs = await createdTestModel.find({
+        "$or": [{
+            "country": job.country,
+            "position": job.position
+        }, {
+            "country": "All",
+            "position": job.position
+        }]
+    })
     if (!findJobs) {
         const jobCreated = await createdTestModel.create(job)
         // console.log(jobCreated);
