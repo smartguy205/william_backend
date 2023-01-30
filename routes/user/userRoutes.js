@@ -272,7 +272,16 @@ userRouter.route("/getTestType").post(async (req, res) => {
     const { userID } = req.body;
     try {
         const user = await userModal.findOne({ _id: userID });
-        let createdTest = await createdTestModel.findOne({ country: user.country, position: user.position }).select({ test_type: 1 })
+        let createdTest = await createdTestModel.
+            //findOne({ country: user.country, position: user.position })
+            findOne({
+                "$or": [{
+                    country: user.country, position: user.position
+                }, {
+                    "country": "All", position: user.position
+                }]
+            })
+            .select({ test_type: 1 })
 
         if (createdTest) {
             return res.json({ data: createdTest.test_type, success: true });

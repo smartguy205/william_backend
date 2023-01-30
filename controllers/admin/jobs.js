@@ -38,8 +38,15 @@ export const getJobs = async (res) => {
 }
 
 export const getJobsForAUser = async ({ country, position }, res) => {
+
     try {
-        const findJobs = await createdTestModel.findOne({ country, position })
+        const findJobs = await createdTestModel.//findOne({ country, position })
+            findOne({
+                "$or": [
+                    { "country": country, },
+                    { "country": "All", }
+                ]
+            })
         if (!findJobs)
             return res.status(404).json({ success: false, error: "No Test found for your location/position" });
         else return res.status(200).json({ success: true, msg: "Jobs", findJobs })
