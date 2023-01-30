@@ -18,7 +18,6 @@ export const addJobs = async (job, res) => {
     // })
 
     if (!findJobs) {
-
         const jobCreated = await createdTestModel.create(job)
         // console.log(jobCreated);
         // return res.status(200).json({ success: true, msg: 'Job Created !!' });

@@ -13,13 +13,15 @@ import { getCountry } from '../../controllers/user/userDetails.js';
 import SubmitTypingTest from '../../controllers/user/TypingTest.js';
 const userRouter = express.Router();
 /*import { excelModal } from '../../models/ExcelSchema.js';
-import { QuestionsandAnswers } from "./USQuestions.js"
+import { QuestionsandAnswers } from "./UpdatedUSQuestions.js"
+
 userRouter.post("/db", async (req, res) => {
     let records = await excelModal.find().lean();
 
     records = records.map(async (r, i) => {
         const QuestionsArr = { us: QuestionsandAnswers[i].Question }
-        return await excelModal.updateOne({ _id: r._id }, { QuestionsArr: QuestionsArr })
+        const OptionsArr = { us: QuestionsandAnswers[i].Options }
+        return await excelModal.updateOne({ _id: r._id }, { QuestionsArr, OptionsArr })
     })
     return res.status(200).json(records)
 })*/

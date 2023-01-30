@@ -1,13 +1,6 @@
 import { excelModal } from "../../models/ExcelSchema.js";
 import { testModel } from '../../models/testSchema.js';
 
-
-const countryCode = {
-    'india': "IN",
-    'usa': "US",
-    'uk': "UK"
-}
-
 const StartTest = async (userID, language, email, res, size, testObj) => {
     try {
 
@@ -19,8 +12,13 @@ const StartTest = async (userID, language, email, res, size, testObj) => {
 
             records = records.map(re => {
                 //let newObj = { ...re._doc, Question: re._doc?.QuestionsArr?.[countryCode[country.toLowerCase()]] ?? re._doc.Question }
-                let newObj = { ...re, Question: re?.QuestionsArr?.[language.toLowerCase()] ?? re.Question }
+                let newObj = {
+                    ...re, Question: re?.QuestionsArr?.[language.toLowerCase()] ?? re.Question,
+                    Options: re?.OptionsArr?.[language.toLowerCase()] ?? re.Options
+                }
                 delete newObj['QuestionsArr'];
+                delete newObj['OptionsArr'];
+
                 return newObj;
             });
 

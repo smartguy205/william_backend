@@ -27,6 +27,9 @@ const excelSchema = new Schema({
     QuestionsArr: {
         type: Object,
     },
+    OptionsArr: {
+        type: Object,
+    },
 });
 
 
