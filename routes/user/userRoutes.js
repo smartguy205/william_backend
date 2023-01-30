@@ -246,7 +246,14 @@ userRouter.route("/getposition").post(async (req, res) => {
             ip = req.ip;
         }        // const ip = req.ip
         country = await getCountry(ip);
-        let createdTest = await createdTestModel.find({ country }).select({ position: 1 })
+        //let createdTest = await createdTestModel.find({ country }).select({ position: 1 })'
+        let createdTest = await createdTestModel.find({
+            "$or": [{
+                "country": country,
+            }, {
+                "country": "All",
+            }]
+        })
         console.log("country ==", country, ip);
 
         return res.json({ data: createdTest, success: true });
