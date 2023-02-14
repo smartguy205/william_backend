@@ -12,19 +12,67 @@ import { createS3PreSignedUrl } from '../../controllers/user/PreSignedUrl.js';
 import { getCountry } from '../../controllers/user/userDetails.js';
 import SubmitTypingTest from '../../controllers/user/TypingTest.js';
 const userRouter = express.Router();
-/*import { excelModal } from '../../models/ExcelSchema.js';
-import { QuestionsandAnswers } from "./UpdatedUSQuestions.js"
+import { excelModal } from '../../models/ExcelSchema.js';
+//import { QuestionsandAnswers } from "./UpdatedUSQuestions.js"
 
 userRouter.post("/db", async (req, res) => {
     let records = await excelModal.find().lean();
 
-    records = records.map(async (r, i) => {
-        const QuestionsArr = { us: QuestionsandAnswers[i].Question }
-        const OptionsArr = { us: QuestionsandAnswers[i].Options }
-        return await excelModal.updateOne({ _id: r._id }, { QuestionsArr, OptionsArr })
+    /*   records = records.map(async (r, i) => {
+           if (r.Images) {
+               const obj = QuestionsandAnswers.find(ele => JSON.stringify(ele.Images) === JSON.stringify(r.Images))
+               //console.log(r.Images, obj.Images, JSON.stringify(obj.Images) === JSON.stringify(r.Images));
+               if (obj?.Images && obj.Images.length > 0) {
+                  const QuestionsArr = { us: QuestionsandAnswers[i].Question }
+           const OptionsArr = { us: QuestionsandAnswers[i].Options }
+           return await excelModal.updateOne({ _id: r._id }, { QuestionsArr, OptionsArr })
+                   return { img: obj.Images, img1: r.Images }
+               }
+               else console.log(obj)
+           }
+           
+       }) 
+    let recordsArr = QuestionsandAnswers.map(async (question) => {
+        const obj = records.find(ele => JSON.stringify(ele.Images) ===
+            JSON.stringify(question.Images))
+        if (obj?.Images && obj.Images.length > 0) {
+            const QuestionsArr = { us: question.Question }
+            const OptionsArr = { us: question.Options }
+            console.log(obj.Images)
+            return await excelModal.updateOne({ _id: obj._id }, { QuestionsArr, OptionsArr })
+
+            return { img: obj.Images, img1: question.Images, id: obj._id }
+        }
+         else return await excelModal.updateOne({ _id: obj._id }, { "$unset": { QuestionsArr: 1, OptionsArr: 1 } })
+    })*
+    let recordsArr = QuestionsandAnswers.map(async (question) => {
+
+        const obj = records.find(ele => ele.Question === question.Question)
+        const QuestionsArr = { us: question.Question }
+        const OptionsArr = { us: question.Options }
+
+        if (obj)
+            //await excelModal.updateOne({ _id: obj._id }, { QuestionsArr, OptionsArr })
+            return { img: obj?.Question, img1: question?.Question, id: obj._id }
+        else return { question }
     })
-    return res.status(200).json(records)
-})*/
+    let recordsArr = await excelModal.aggregate([
+        { "$match": { "Question": { "$exists": true }, "QuestionsArr": { "$exists": true } } },
+        {
+            "$project": {
+                "Question": 1,
+                "QuestionsArr": 1,
+                "aCmp": { "$cmp": ["$Question", "$QuestionsArr.us"] }
+            }
+        },
+        { "$match": { "aCmp": 1 } }
+    ]);*/
+    let recordsArr = await excelModal.find({ "Images.0": { $exists: true } }).lean();
+    recordsArr = recordsArr.map(data => ({ _id: data._id, Question: data.Question, images: data.Images[0] }))
+    // recordsArr = await Promise.all([...recordsArr]);
+    //console.log(recordsArr.length)
+    return res.status(200).json(recordsArr)
+})
 userRouter.post("/userCV", (req, res) => {
     try {
         let data = req.body.data;
