@@ -35,7 +35,8 @@ export const createS3PreSignedUrl = {
                 ACL: 'public-read',
             }
             const URL = await s3.getSignedUrl(type, params);
-            // let link = `https://s3.console.aws.amazon.com/s3/object/${bucket}?region=us-east-1&prefix=${s3key}`;
+            let link = `https://${bucket}.s3.console.aws.amazon.com/${s3key}`;
+            //let link = `https://s3.console.aws.amazon.com/s3/object/${bucket}?region=us-east-1&prefix=${s3key}`;
 
             return res.json({ success: true, msg: "Url generated", url: URL, file: link })
         }

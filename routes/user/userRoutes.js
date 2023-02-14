@@ -271,6 +271,7 @@ userRouter.post('/url', (req, res) => {
             createS3PreSignedUrl.createUrl(fileName, res)
         })
         .catch(err => {
+            console.log(err)
             return res.status(401).json({ success: false, msg: "Validation error occurred, Please re-check you details", error: err.message?.replace(".mimetype", " type") })
         })
 })
