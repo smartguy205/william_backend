@@ -118,7 +118,7 @@ userRouter.post("/StartTest", async (req, res) => {
                 "position": user.position
             }]
         });
-
+        console.log(createdTest, user)
         if (!createdTest) return res.status(404).json({ success: false, msg: "No Test found for your location/position" });
 
         const test = await testModel.findOne({ email: email, userID: userID });
@@ -331,7 +331,7 @@ userRouter.route("/getTestType").post(async (req, res) => {
                 }]
             })
             .select({ test_type: 1 })
-
+        console.log(createdTest)
         if (createdTest) {
             return res.json({ data: createdTest.test_type, success: true });
         }
