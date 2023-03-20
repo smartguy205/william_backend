@@ -305,7 +305,7 @@ userRouter.route("/getposition").post(async (req, res) => {
         })
         console.log("country ==", country, ip);
 
-        return res.json({ data: createdTest, success: true });
+        return res.json({ data: createdTest, success: true, ip: ip, country: country });
         // if (country.toLowerCase() === 'india') {
         // } else {
         //     return res.json({ data: createdTest, success: true })
