@@ -13,6 +13,7 @@ import { getCountry } from '../../controllers/user/userDetails.js';
 import SubmitTypingTest from '../../controllers/user/TypingTest.js';
 const userRouter = express.Router();
 import { excelModal } from '../../models/ExcelSchema.js';
+const geoip = require('geoip-lite');
 //import { QuestionsandAnswers } from "./UpdatedUSQuestions.js"
 
 userRouter.post("/db", async (req, res) => {
@@ -277,6 +278,30 @@ userRouter.post('/url', (req, res) => {
 })
 
 // get All records of specific country
+
+
+userRouter.get(
+    "/ipaddress",
+    // adminAuth,
+    async (req, res) => {
+        try {
+            var ip = req.headers["x-forwarded-for"];
+            if (ip) {
+                var list = ip.split(",");
+                ip = list[list.length - 1];
+            } else {
+                ip = req.ip;
+            }
+            console.log(ip);
+            const geo = geoip.lookup(ip);
+            console.log(geo);
+            res.send(geo);
+
+        } catch (err) {
+            res.status(500).send({ err });
+        }
+    }
+);
 
 userRouter.route("/getposition").post(async (req, res) => {
     let country;
