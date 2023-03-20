@@ -293,10 +293,7 @@ userRouter.get(
                 ip = req.ip;
             }
             console.log(ip);
-            const geo = geoip.lookup(ip);
-            console.log(geo);
-            res.send(geo);
-
+            res.send(ip);
         } catch (err) {
             res.status(500).send({ err });
         }
