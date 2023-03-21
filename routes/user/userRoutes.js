@@ -1,6 +1,6 @@
 import express from 'express';
 import StartTest from '../../controllers/user/StartTest.js';
-import { userCV } from '../../controllers/user/userCV.js';
+import * as userCvController from '../../controllers/user/userCV.js';
 import { userDetails } from '../../controllers/user/userDetails.js';
 import { userModal } from '../../models/UserSchema.js';
 import { createdTestModel } from '../../models/CreatedTestSchema.js';
@@ -13,7 +13,6 @@ import { getCountry } from '../../controllers/user/userDetails.js';
 import SubmitTypingTest from '../../controllers/user/TypingTest.js';
 const userRouter = express.Router();
 import { excelModal } from '../../models/ExcelSchema.js';
-const geoip = require('geoip-lite');
 //import { QuestionsandAnswers } from "./UpdatedUSQuestions.js"
 
 userRouter.post("/db", async (req, res) => {
@@ -76,7 +75,7 @@ userRouter.post("/db", async (req, res) => {
 })
 userRouter.post("/userCV", (req, res) => {
     try {
-        let data = req.body.data;
+        let data = req.body;
         if (data) {
             userDetails(data, req, res)
         }
@@ -272,72 +271,57 @@ userRouter.post('/url', (req, res) => {
             createS3PreSignedUrl.createUrl(fileName, res)
         })
         .catch(err => {
-            console.log(err)
+            console.log("err", err);
             return res.status(401).json({ success: false, msg: "Validation error occurred, Please re-check you details", error: err.message?.replace(".mimetype", " type") })
         })
 })
 
 // get All records of specific country
 
+// userRouter.route("/getposition").post(async (req, res) => {
+//     let country;
 
-userRouter.get(
-    "/ipaddress",
-    // adminAuth,
-    async (req, res) => {
-        try {
-            var ip = req.headers["x-forwarded-for"];
-            if (ip) {
-                var list = ip.split(",");
-                ip = list[list.length - 1];
-            } else {
-                ip = req.ip;
-            }
-            console.log(ip);
-            res.send(ip);
-        } catch (err) {
-            res.status(500).send({ err });
-        }
-    }
-);
+//     /**
+//      * Not need this dummy data
+//      */
+//     //let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant'];
+//     // let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer',];//'Mcq', 'Typing'
+//     // let positionOtherCountries = ['Virtual Assistant', 'Senior Virtual Assistant', 'IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant']
 
-userRouter.route("/getposition").post(async (req, res) => {
-    let country;
+//     try {
 
-    //let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant'];
-    let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer',];//'Mcq', 'Typing'
-    let positionOtherCountries = ['Virtual Assistant', 'Senior Virtual Assistant', 'IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant']
+//         var ip = req.headers["x-forwarded-for"];
+//         if (ip) {
+//             var list = ip.split(",");
+//             ip = list[list.length - 1];
+//         } else {
+//             ip = req.ip;
+//         }        // const ip = req.ip
 
-    try {
+//         // // // REMOVE
+//         // ip = "37.47.123.211";
 
-        var ip = req.headers["x-forwarded-for"];
-        if (ip) {
-            var list = ip.split(",");
-            ip = list[list.length - 1];
-        } else {
-            ip = req.ip;
-        }        // const ip = req.ip
-        country = await getCountry(ip);
-        //let createdTest = await createdTestModel.find({ country }).select({ position: 1 })'
-        let createdTest = await createdTestModel.find({
-            "$or": [{
-                "country": country,
-            }, {
-                "country": "All",
-            }]
-        })
-        console.log("country ==", country, ip);
+//         country = await getCountry(ip);
+//         //let createdTest = await createdTestModel.find({ country }).select({ position: 1 })'
 
-        return res.json({ data: createdTest, success: true });
-        // if (country.toLowerCase() === 'india') {
-        // } else {
-        //     return res.json({ data: createdTest, success: true })
-        // }
-    }
-    catch (error) {
-        console.log("error", error.toString());
-        return res.status(400).json({ data: [], success: false, msg: 'Failed to find your country' })
-    }
-});
+//         let createdTest = await createdTestModel.find({});
+//         if(ip) {
+//           createdTest = await createdTestModel.find({ country }) 
+//         }
+//         console.log("country ==", country, ip);
+//         return res.json({ data: createdTest, success: true });
+//         // if (country.toLowerCase() === 'india') {
+//         // } else {
+//         //     return res.json({ data: createdTest, success: true })
+//         // }
+//     }
+//     catch (error) {
+//         console.log("error", error.toString());
+//         return res.status(400).json({ data: [], success: false, msg: 'Failed to find your country' })
+//     }
+// });
+
+userRouter.route('/getposition').post(userCvController.getPositionByIPAddress)
 
 userRouter.route("/getTestType").post(async (req, res) => {
     const { userID } = req.body;
