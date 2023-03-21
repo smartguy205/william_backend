@@ -115,7 +115,7 @@ export const getPositionByIPAddress = async (req, res) => {
     } // const ip = req.ip
 
     country = await getCountry(ip);
-    console.log("country ==", country, ip);
+    console.log("country, ip", country, ip);
     let createdTest;
     if (ip) {
       createdTest = await createdTestModel.find({
