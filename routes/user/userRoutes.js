@@ -14,6 +14,12 @@ import SubmitTypingTest from '../../controllers/user/TypingTest.js';
 const userRouter = express.Router();
 import { excelModal } from '../../models/ExcelSchema.js';
 //import { QuestionsandAnswers } from "./UpdatedUSQuestions.js"
+// const maxmind = require('maxmind');
+// const mmdb_file = '/../public/GeoLite2-Country.mmdb';
+
+
+// const maxmind = require('geoip2').openSync('../../public/GeoLite2-Country.mmdb');
+// const metadata = maxmind.metadata;
 
 userRouter.post("/db", async (req, res) => {
     let records = await excelModal.find().lean();
@@ -278,48 +284,56 @@ userRouter.post('/url', (req, res) => {
 
 // get All records of specific country
 
-// userRouter.route("/getposition").post(async (req, res) => {
-//     let country;
+userRouter.route("/getposition").post(async (req, res) => {
+    let country;
 
-//     /**
-//      * Not need this dummy data
-//      */
-//     //let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant'];
-//     // let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer',];//'Mcq', 'Typing'
-//     // let positionOtherCountries = ['Virtual Assistant', 'Senior Virtual Assistant', 'IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant']
+    /**
+     * Not need this dummy data
+     */
+    //let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant'];
+    // let positionIndia = ['IT Recrutier', 'Company Secretary', 'Web Developer',];//'Mcq', 'Typing'
+    // let positionOtherCountries = ['Virtual Assistant', 'Senior Virtual Assistant', 'IT Recrutier', 'Company Secretary', 'Web Developer', 'Assistant']
 
-//     try {
+    try {
 
-//         var ip = req.headers["x-forwarded-for"];
-//         if (ip) {
-//             var list = ip.split(",");
-//             ip = list[list.length - 1];
-//         } else {
-//             ip = req.ip;
-//         }        // const ip = req.ip
+        // const countries = [];
+        // for (const locale of metadata.locales) {
+        //     for (const country of metadata.countryDatabase.countries) {
+        //         countries.push(country.names[locale]);
+        //     }
+        // }
 
-//         // // // REMOVE
-//         // ip = "37.47.123.211";
+        // console.log(countries);
+        var ip = req.headers["x-forwarded-for"];
+        if (ip) {
+            var list = ip.split(",");
+            ip = list[list.length - 1];
+        } else {
+            ip = req.ip;
+        }        // const ip = req.ip
 
-//         country = await getCountry(ip);
-//         //let createdTest = await createdTestModel.find({ country }).select({ position: 1 })'
+        // // // REMOVE
+        // ip = "37.47.123.211";
 
-//         let createdTest = await createdTestModel.find({});
-//         if(ip) {
-//           createdTest = await createdTestModel.find({ country }) 
-//         }
-//         console.log("country ==", country, ip);
-//         return res.json({ data: createdTest, success: true });
-//         // if (country.toLowerCase() === 'india') {
-//         // } else {
-//         //     return res.json({ data: createdTest, success: true })
-//         // }
-//     }
-//     catch (error) {
-//         console.log("error", error.toString());
-//         return res.status(400).json({ data: [], success: false, msg: 'Failed to find your country' })
-//     }
-// });
+        country = await getCountry(ip);
+        //let createdTest = await createdTestModel.find({ country }).select({ position: 1 })'
+
+        let createdTest = await createdTestModel.find({});
+        // if(ip) {
+        //   createdTest = await createdTestModel.find({ country }) 
+        // }
+        console.log("country ==", country, ip);
+        return res.json({ data: createdTest, success: true });
+        // if (country.toLowerCase() === 'india') {
+        // } else {
+        //     return res.json({ data: createdTest, success: true })
+        // }
+    }
+    catch (error) {
+        console.log("error", error.toString());
+        return res.status(400).json({ data: [], success: false, msg: 'Failed to find your country' })
+    }
+});
 
 userRouter.route('/getposition').post(userCvController.getPositionByIPAddress)
 
