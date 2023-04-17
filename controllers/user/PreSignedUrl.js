@@ -7,6 +7,7 @@ AWS.config.update({
     accessKeyId: process.env.S3_ACCESS_ID,
     secretAccessKey: process.env.S3_SECRET_KEY
 });
+// console.log(process.env.S3_ACCESS_ID)
 
 const s3 = new AWS.S3({
     signatureVersion: "v4",
@@ -17,6 +18,7 @@ export const createS3PreSignedUrl = {
 
     createUrl: async (fileName, res) => {
         try {
+            console.log(res)
             const type = 'putObject';
             let code = getUniqueCode(8);
 
@@ -34,7 +36,9 @@ export const createS3PreSignedUrl = {
                 Expires: 3000,
                 ACL: 'public-read',
             }
+            console.log("this is params", params)
             const URL = await s3.getSignedUrl(type, params);
+            console.log("this is url", URL)
             let link = `https://${bucket}.s3.amazonaws.com/${s3key}`;
             //let link = `https://s3.console.aws.amazon.com/s3/object/${bucket}?region=us-east-1&prefix=${s3key}`;
 
